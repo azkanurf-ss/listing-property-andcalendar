@@ -89,12 +89,12 @@ const Appointment: React.FC<{}> = () => {
   const appointment = useAppoinments(connectSession, { negotiatorsId })
   const negotiators = useSingleNegotiator(connectSession, { id: negotiatorsId })
 
-  // const handleCalendarClicked = (dataProperties: PropertyModel) => {
-  //   if (dataProperties?.id) {
-  //     setNegotiatorsId(dataProperties?.negotiatorId)
-  //     setModalCalendar({ isOpen: true, propertyId: dataProperties?.id })
-  //   }
-  // }
+  const handleCalendarClicked = (dataProperties: PropertyModel) => {
+    if (dataProperties?.id) {
+      setNegotiatorsId(dataProperties?.negotiatorId)
+      setModalCalendar({ isOpen: true, propertyId: dataProperties?.id })
+    }
+  }
 
   const handleSortSelected = (e, name) => {
     setPropertiesParam({ ...propertiesParam, [name]: e.target.value })
@@ -192,7 +192,7 @@ const Appointment: React.FC<{}> = () => {
       </HeaderWrapper>
       {allPropertiesV2?.isLoading && <Loader className='el-mx-auto el-mt4' />}
       {allPropertiesV2?.data?._embedded && (
-        <Table data-num-columns-excl-action-col='7' data-has-call-to-action>
+        <Table data-num-columns-excl-action-col='8' data-has-call-to-action>
           <TableHeadersRow>
             {[
               'Property Id',
@@ -202,6 +202,7 @@ const Appointment: React.FC<{}> = () => {
               'Bathrooms',
               'Price',
               'Status',
+              '',
               '',
             ].map((data, index) => (
               <TableHeader key={index}>{data}</TableHeader>
@@ -230,10 +231,10 @@ const Appointment: React.FC<{}> = () => {
                         ? convertText(data?.selling?.status)
                         : convertText(data?.letting?.status)}
                     </TableCell>
-                    {/* <TableCtaTriggerCell
+                    <TableCtaTriggerCell
                       icon='calendarSystem'
                       onClick={() => handleCalendarClicked(data)}
-                    /> */}
+                    />
                     <TableCtaTriggerCell
                       icon='arrowRightSystem'
                       onClick={() => history.push(`/property/${data?.id}`)}
