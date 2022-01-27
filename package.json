@@ -19,7 +19,7 @@
     "@types/react-router": "^5.1.17",
     "@types/react-router-dom": "^5.3.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
-    "babel-loader": "^8.1.0",
+    "axios": "^0.24.0",
     "concurrently": "^6.5.1",
     "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
@@ -27,9 +27,16 @@
     "enzyme": "^3.11.0",
     "eslint": "^7.32.0",
     "jest-config": "^27.4.5",
+    "moment": "^2.29.1",
+    "pure-react-carousel": "^1.27.8",
     "react": "^17.0.2",
     "react-app-rewired": "^2.1.9",
+    "react-awesome-calendar": "^1.0.14",
+    "react-big-calendar": "^0.38.4",
+    "react-collapsible": "^2.8.4",
     "react-dom": "^17.0.2",
+    "react-player": "^2.9.0",
+    "react-query": "^3.34.7",
     "react-router": "^5.2.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "^4.0.3",
@@ -37,11 +44,11 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "start": "cross-env PORT=8080 react-app-rewired start",
+    "start": "cross-env PORT=8081 react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "serve": "serve build -s -l 8080",
+    "serve": "serve build -s -l 8081",
     "lint": "concurrently 'tsc --noEmit' 'eslint --cache --ext=ts,tsx src'"
   },
   "eslintConfig": {
@@ -58,5 +65,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@types/react-big-calendar": "^0.36.2",
+    "react-icons": "^4.3.1"
   }
 }

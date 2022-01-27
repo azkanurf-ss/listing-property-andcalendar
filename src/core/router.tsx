@@ -1,5 +1,10 @@
 import * as React from 'react'
-import { Route, Router as BrowserRouter, Switch, Redirect } from 'react-router-dom'
+import {
+  Route,
+  Router as BrowserRouter,
+  Switch,
+  Redirect,
+} from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import Routes from '../constants/routes'
 import PrivateRouteWrapper from './private-route-wrapper'
@@ -9,7 +14,7 @@ export const history = createBrowserHistory()
 export const catchChunkError = (
   fn: Function,
   retriesLeft = 3,
-  interval = 500,
+  interval = 500
 ): Promise<{ default: React.ComponentType<any> }> => {
   return new Promise((resolve, reject) => {
     fn()
@@ -28,8 +33,18 @@ export const catchChunkError = (
   })
 }
 
-const LoginPage = React.lazy(() => catchChunkError(() => import('../components/pages/login')))
-const AuthenticatedPage = React.lazy(() => catchChunkError(() => import('../components/pages/authenticated')))
+const LoginPage = React.lazy(() =>
+  catchChunkError(() => import('../components/pages/login'))
+)
+const AuthenticatedPage = React.lazy(() =>
+  catchChunkError(() => import('../components/pages/authenticated'))
+)
+const PropertiesPage = React.lazy(() =>
+  catchChunkError(() => import('../components/pages/listProperties'))
+)
+const PropertyDetailsPage = React.lazy(() =>
+  catchChunkError(() => import('../components/pages/propertyDetails'))
+)
 
 const Router = () => (
   <BrowserRouter history={history}>
@@ -38,7 +53,13 @@ const Router = () => (
         <Route path={Routes.LOGIN} component={LoginPage} />
         <PrivateRouteWrapper>
           <Switch>
-            <Route path={Routes.HOME} component={AuthenticatedPage} />
+            <Route exact path={Routes.HOME} component={AuthenticatedPage} />
+            <Route exact path={Routes.PROPERTIES} component={PropertiesPage} />
+            <Route
+              exact
+              path={`${Routes.PROPERTY}/:id`}
+              component={PropertyDetailsPage}
+            />
           </Switch>
         </PrivateRouteWrapper>
         <Redirect to={Routes.LOGIN} />

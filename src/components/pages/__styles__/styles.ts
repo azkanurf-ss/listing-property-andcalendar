@@ -85,3 +85,6 @@ export const loginImages = css`
   width: auto;
   position: relative;
 `
+export const paginationCustom = css`
+  margin: 0;
+`
